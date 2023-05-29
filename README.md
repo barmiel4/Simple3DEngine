@@ -17,7 +17,7 @@ Simple 3D engine capable of loading and rendering wireframe 3D models in perspec
 
 ## Showcase
 Utah Teapot
-![teapot](https://github.com/BOOGIE-MAN/Simple3DEngine/assets/54042389/905214ef-01c9-4e35-9d72-15c71a0bee5b)
+   ![teapot](https://github.com/BOOGIE-MAN/Simple3DEngine/assets/54042389/905214ef-01c9-4e35-9d72-15c71a0bee5b)
 
 ## How to run it
 It can be run through Visual Studio 2022 only in x86 mode in either Debug or Release[prefered]
