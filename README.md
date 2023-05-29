@@ -1,1 +1,25 @@
 # Simple3DEngine
+
+## About the project
+Simple 3D engine capable of loading and rendering wireframe 3D models in perspective. It uses c++ and simple graphics library called SFML. Math is handeled mostly by a basic math library allowing for operations on 4D vectors and 4x4 matricies. Engine, by default renders the famous utah teapot, rotating around the up-axis.
+
+### Features and general information
+  * Operations on vectors and matrices
+  * Translation and rotation in 3D
+  * Perspecitve projection
+  * Loading 3D model from file
+  * Simple performence profiling - frame time display
+  * Coordinate system used: X - forward, Y - right, Z - up
+
+### Technologies used
+  * SFML 2.51
+  * c++14
+
+## How to run it
+It can be run through Visual Studio 2022 only in x86 mode in either Debug or Release[prefered]
+
+### File Input restrictions
+In order to load the model it has to be placed under (ProjectDirectory)\Resources\Model in a .txt file in the following format: first model (space/tab separeted) vertecies must be specified with 'v' at the begining of the line then indicies of trinagles begining with 't' with the same format as vertecies.
+
+## Idea
+The project was written as my own project to get to know the basics of 3D graphics.
