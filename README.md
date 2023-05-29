@@ -12,7 +12,7 @@ Simple 3D engine capable of loading and rendering wireframe 3D models in perspec
   * Coordinate system used: X - forward, Y - right, Z - up
 
 ### Technologies used
-  * SFML 2.51
+  * SFML 2.5.1
   * c++14
 
 ## How to run it
