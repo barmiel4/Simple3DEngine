@@ -19,7 +19,7 @@ Simple 3D engine capable of loading and rendering wireframe 3D models in perspec
 It can be run through Visual Studio 2022 only in x86 mode in either Debug or Release[prefered]
 
 ### File Input restrictions
-In order to load the model it has to be placed under (ProjectDirectory)\Resources\Model in a .txt file in the following format: first model (space/tab separeted) vertecies must be specified with 'v' at the begining of the line then indicies of trinagles begining with 't' with the same format as vertecies.
+In order to load the model it has to be placed under (ProjectDirectory)\Resources\Model in a .txt file in the following format: first model (space/tab separeted) vertecies must be specified with 'v' at the begining of the line then indicies of trinagles begining with 't' with the same format as vertecies(indexing goes from 1 to number of triangles).
 
 ## Idea
 The project was written as my own project to get to know the basics of 3D graphics.
