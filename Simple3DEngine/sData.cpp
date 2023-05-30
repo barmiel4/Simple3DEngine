@@ -138,13 +138,6 @@ void shape::model::render(sf::RenderWindow& window, math::Matrix4x4& proj, float
 
 	triangle projectedTriangle;
 
-	sf::ConvexShape onScreen;
-	onScreen.setPointCount(3);
-
-	onScreen.setFillColor(sf::Color(0.0f, 0.0f, 0.0f, 0.0f));
-	onScreen.setOutlineColor(sf::Color::White);
-	onScreen.setOutlineThickness(-1.0f);
-
 	for (auto& t : triangles)
 	{
 		projectedTriangle[0] = math::toCartesian(proj * math::toHomogeneus(t[0]));
@@ -165,8 +158,6 @@ void shape::model::loadModel(const char* filePath)
 {
 	std::ifstream file(filePath);
 
-	sf::Vector3f max(0.f, 0.f, 0.f);
-	sf::Vector3f min(10000.f, 10000.f, 10000.f);
 	sf::Vector3f loaded;
 	char type;
 	std::vector<sf::Vector3f> vertecies;
@@ -179,10 +170,7 @@ void shape::model::loadModel(const char* filePath)
 		file >> loaded.z;
 		
 		if (type == 'v')
-		{
-			loaded.z *= -1;
 			vertecies.push_back(loaded);
-		}
 		else if(type == 't')
 			triangles.push_back( { vertecies[loaded.x - 1], vertecies[loaded.y - 1], vertecies[loaded.z - 1] } );
 	}
