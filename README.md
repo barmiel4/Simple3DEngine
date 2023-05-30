@@ -3,7 +3,7 @@
 ## About the project
 Simple 3D engine capable of loading and rendering wireframe 3D models in perspective. It uses c++ and simple graphics library called SFML. Math is handeled mostly by a basic math library allowing for operations on 4D vectors and 4x4 matricies. Engine, by default renders the famous utah teapot, rotating around the up-axis.
 
-### Features and general information
+### Features
   * Operations on vectors and matrices
   * Translation and rotation in 3D
   * Perspecitve projection
@@ -21,8 +21,11 @@ Simple 3D engine capable of loading and rendering wireframe 3D models in perspec
 ## How to run it
 It can be run through Visual Studio 2022 only in x86 mode in either Debug or Release[prefered]
 
+### Platform
+Windows 10
+
 ### File Input restrictions
-In order to load the model it has to be placed under (ProjectDirectory)\Resources\Model in a .txt file in the following format: first model (space/tab separeted) vertecies must be specified with 'v' at the begining of the line then indicies of trinagles begining with 't' with the same format as vertecies(indexing goes from 1 to number of triangles).
+In order to load the model it has to be placed under (ProjectDirectory)\Resources\Model in a .txt file in the following format: first (space/tab separeted) model vertecies must be specified with 'v' at the begining of the line then indicies of trinagles begining with 't' with the same format as vertecies(indexing goes from 1 to number of triangles).
 
 ## Idea
 The project was written as my own project to get to know the basics of 3D graphics.
