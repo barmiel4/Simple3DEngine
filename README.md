@@ -1,7 +1,7 @@
 # Simple3DEngine
 
 ## About the project
-Simple 3D engine capable of loading and rendering wireframe 3D models in perspective. It uses c++ and simple graphics library called SFML. Math is handeled mostly by a basic math library allowing for operations on 4D vectors and 4x4 matricies. Engine, by default renders the famous utah teapot, rotating around the up-axis.
+Simple 3D engine capable of loading and rendering wireframe 3D models in perspective. It uses c++ and simple graphics library called SFML. Math is handeled by custom math library allowing for operations on 4D vectors and 4x4 matricies. Engine, by default renders the famous utah teapot, rotating around the up-axis.
 
 ### Features
   * Operations on vectors and matrices
