@@ -1,12 +1,12 @@
 #include "sData.h"
 
 
-v3& shape::triangle::operator [](size_t index)
+v3& shape::Triangle::operator [](size_t index)
 {
 	return tr[index];
 }
 
-void shape::triangle::render(sf::RenderWindow& window) const
+void shape::Triangle::render(sf::RenderWindow& window) const
 {
 	sf::Vertex line[2];
 	line[0].color = sf::Color::Green;
@@ -24,7 +24,7 @@ void shape::triangle::render(sf::RenderWindow& window) const
 	}
 }
 
-shape::model::model()
+shape::Model::Model()
 {
 	triangles =
 	{
@@ -55,12 +55,12 @@ shape::model::model()
 	}
 }
 
-shape::model::model(const char* filePath)
+shape::Model::Model(const char* filePath)
 {
 	loadModel(filePath);
 }
 
-void shape::model::translate(const sf::Vector3f& tranlation)
+void shape::Model::translate(const sf::Vector3f& tranlation)
 {
 	math::Matrix4x4 tMatrix(
 		v4(1.0f, 0.0f, 0.0f, 0.0f),
@@ -76,7 +76,7 @@ void shape::model::translate(const sf::Vector3f& tranlation)
 	}
 }
 
-void shape::model::rollRotation(float angle)
+void shape::Model::rollRotation(float angle)
 {
 	//row representation:
 	math::Matrix4x4 rotation(
@@ -94,7 +94,7 @@ void shape::model::rollRotation(float angle)
 	}
 }
 
-void shape::model::pitchRotation(float angle)
+void shape::Model::pitchRotation(float angle)
 {
 	//row representation:
 	math::Matrix4x4 rotation(
@@ -112,7 +112,7 @@ void shape::model::pitchRotation(float angle)
 	}
 }
 
-void shape::model::yawRotation(float angle)
+void shape::Model::yawRotation(float angle)
 {
 	//row representation:
 	math::Matrix4x4 rotation(
@@ -129,14 +129,14 @@ void shape::model::yawRotation(float angle)
 	}
 }
 
-void shape::model::render(sf::RenderWindow& window, math::Matrix4x4& proj, float sWidth, float sHeight)
+void shape::Model::render(sf::RenderWindow& window, const math::Matrix4x4& proj, float sWidth, float sHeight)
 {
 	//half the screen coords
 	sWidth *= 0.5f;
 	sHeight *= 0.5f;
 	sf::Vector3f mapper(1.f, 1.f, 1.f);
 
-	triangle projectedTriangle;
+	Triangle projectedTriangle;
 
 	for (auto& t : triangles)
 	{
@@ -154,7 +154,7 @@ void shape::model::render(sf::RenderWindow& window, math::Matrix4x4& proj, float
 	}
 }
 
-void shape::model::loadModel(const char* filePath)
+void shape::Model::loadModel(const char* filePath)
 {
 	std::ifstream file(filePath);
 

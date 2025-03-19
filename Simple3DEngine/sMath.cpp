@@ -1,36 +1,42 @@
 #include <iostream>
 #include "sMath.h"
 
-math::vec4d::vec4d()
+
+math::Vec4d::Vec4d()
 	: w(1.f) {}
 
-math::vec4d::vec4d(float xin, float yin, float zin, float win)
+math::Vec4d::Vec4d(float xin, float yin, float zin, float win)
 	: w(win), xyz(xin, yin, zin) {}
 
-math::vec4d::vec4d(const sf::Vector3f& xyzin, float win)
+math::Vec4d::Vec4d(const sf::Vector3f& xyzin, float win)
 	: xyz(xyzin), w(win) {}
 
-math::vec4d math::vec4d::operator *(float scalar) const
+math::Vec4d math::Vec4d::operator *(float scalar) const
 {
 	sf::Vector3f n = scalar * xyz;
-	vec4d ret = *(vec4d*)&n;
+	Vec4d ret = *(Vec4d*)&n;
 	ret.w = w * scalar;
 
 	return ret;
 }
 
-void math::vec4d::operator *= (float scalar)
+void math::Vec4d::operator *= (float scalar)
 {
 	xyz *= scalar;
 	w *= scalar;
 }
 
-float& math::vec4d::operator [](int index)
+float& math::Vec4d::operator [](int index)
 {
 	return (*(&(xyz.x) + index));
 }
 
-math::Matrix4x4::Matrix4x4(const vec4d& v1, const vec4d& v2, const vec4d& v3, const vec4d& v4)
+float math::Vec4d::operator [](int index) const
+{
+	return (*(&(xyz.x) + index));
+}
+
+math::Matrix4x4::Matrix4x4(const Vec4d& v1, const Vec4d& v2, const Vec4d& v3, const Vec4d& v4)
 {
 	m[0] = v1;
 	m[1] = v2;
@@ -38,7 +44,27 @@ math::Matrix4x4::Matrix4x4(const vec4d& v1, const vec4d& v2, const vec4d& v3, co
 	m[3] = v4;
 }
 
-math::vec4d& math::Matrix4x4::operator [](const int& index)
+math::Matrix4x4 math::Matrix4x4::GetProjectionMatrix(float FOV, float far, float near, float screenWidth, float screenHeight)
+{
+	float aRatio = (float)screenHeight / screenWidth;
+
+	float f = far / (far - near);
+	float t = 1.0f / tanf(FOV / 2.0f);
+
+	return math::Matrix4x4(
+		Vec4d(f, 0.0f, 0.0f, 1.0f),
+		Vec4d(0.0f, t * aRatio, 0.0f, 0.0f),
+		Vec4d(0.0f, 0.0f, -t, 0.0f),
+		Vec4d(-(f * near), 0.0f, 0.0f, 0.0f));
+}
+
+
+math::Vec4d math::Matrix4x4::operator [](const int& index) const
+{
+	return m[index];
+}
+
+math::Vec4d& math::Matrix4x4::operator [](const int& index)
 {
 	return m[index];
 }
@@ -58,9 +84,9 @@ void math::Matrix4x4::operator *=(float scalar)
 		m[i] *= scalar;
 }
 
-math::vec4d math::Matrix4x4::operator *(vec4d v)
+math::Vec4d math::Matrix4x4::operator *(Vec4d v) const
 {
-	vec4d ret(0.0f, 0.0f, 0.0f, 0.0f);
+	Vec4d ret(0.0f, 0.0f, 0.0f, 0.0f);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -70,12 +96,12 @@ math::vec4d math::Matrix4x4::operator *(vec4d v)
 	return ret;
 }
 
-math::vec4d math::toHomogeneus(const sf::Vector3f& v, float w)
+math::Vec4d math::toHomogeneus(const sf::Vector3f& v, float w)
 {
-	return math::vec4d(v, w);
+	return math::Vec4d(v, w);
 }
 
-sf::Vector3f math::toCartesian(const math::vec4d& v)
+sf::Vector3f math::toCartesian(const math::Vec4d& v)
 {
 	sf::Vector3f ret;
 	if (v.w)
@@ -85,18 +111,17 @@ sf::Vector3f math::toCartesian(const math::vec4d& v)
 	return ret;
 }
 
-
-std::ostream& operator<<(std::ostream& os, const sf::Vector3f& v)
+std::ostream& math::operator<<(std::ostream& os, const sf::Vector3f& v)
 {
 	return os << "x:\t" << v.x << "\ty:\t" << v.y << "\tz:\t" << v.z;
 }
 
-std::ostream& operator<<(std::ostream& os, const math::vec4d& v)
+std::ostream& math::operator<<(std::ostream& os, const math::Vec4d& v)
 {
 	return os << v.xyz << "\tw:\t" << v.w;
 }
 
-std::ostream& operator<<(std::ostream& os, const math::Matrix4x4& mat)
+std::ostream& math::operator<<(std::ostream& os, const math::Matrix4x4& mat)
 {
 	for (const auto& v : mat.m)
 		os << v;

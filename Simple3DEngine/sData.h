@@ -5,12 +5,12 @@
 #include "sMath.h"
 
 typedef sf::Vector3f v3;
-typedef math::vec4d v4;
+typedef math::Vec4d v4;
 
 
 namespace shape
 {
-	struct triangle
+	struct Triangle
 	{
 		v3 tr[3];
 
@@ -19,13 +19,13 @@ namespace shape
 		void render(sf::RenderWindow& window) const;
 	};
 
-	struct model
+	class Model
 	{
-		std::vector<triangle> triangles;
+	public:
 
-		model();
+		Model();
 
-		model(const char* filePath);
+		Model(const char* filePath);
 
 		void translate(const sf::Vector3f& tranlation);
 
@@ -35,8 +35,11 @@ namespace shape
 
 		void yawRotation(float angle);
 
-		void render(sf::RenderWindow& window, math::Matrix4x4& proj, float sWidth, float sHeight);
+		void render(sf::RenderWindow& window, const math::Matrix4x4& proj, float sWidth, float sHeight);
 
 		void loadModel(const char* filePath);
+
+	private:
+		std::vector<Triangle> triangles;
 	};
 }
